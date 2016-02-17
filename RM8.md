@@ -1,7 +1,3 @@
----
-layout: default
----
-
 # RM8 .NET SDK Examples
 
 ## Add the following *using* statements 
