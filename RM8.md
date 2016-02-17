@@ -1,5 +1,5 @@
 ---
-title: Document Center
+layout: default
 ---
 
-## RM8 .NET SDK Examples
+# RM8 .NET SDK Examples
