@@ -58,15 +58,11 @@ using TRIMSDK;
 ```
   public RecordType GetRecordType(string recordTypeName)
   {
-    EnsureDb();
-
     return TrimDb.GetRecordType(recordTypeName);
   }
 
   public IEnumerable<RecordType> GetRecordTypes()
   {
-    EnsureDb();
-
     var list = new List<RecordType>();
     var recTypes = TrimDb.MakeRecordTypes();
     recTypes.SelectAll();
@@ -90,8 +86,6 @@ using TRIMSDK;
 ```
   public IEnumerable<TRIMSDK.Classification> GetClassifications()
   {
-    EnsureDb();
-
     var list = new List<Classification>();
     var classifications = TrimDb.MakeClassifications();
     classifications.SelectAll();
@@ -106,15 +100,11 @@ using TRIMSDK;
 
   public TRIMSDK.Classification GetClassification(string classificationName)
   {
-    EnsureDb();
-
     return GetClassifications().First(c => c.Name.Equals(classificationName, StringComparison.OrdinalIgnoreCase));
   }
 
   public IEnumerable<string> GetClassificationNames()
   {
-    EnsureDb();
-
     return GetClassifications().Select(c => c.Name);
   }
 ```
@@ -124,8 +114,6 @@ using TRIMSDK;
 ```
   public IEnumerable<FieldDefinition> GetFields()
   {
-    EnsureDb();
-
     var list = new List<FieldDefinition>();
     var fieldDefs = TrimDb.MakeFieldDefinitions();
     fieldDefs.SelectAll();
@@ -140,15 +128,11 @@ using TRIMSDK;
 
   public FieldDefinition GetField(string fieldName)
   {
-    EnsureDb();
-
     return GetFields().First(x => x.Name.Equals(fieldName, StringComparison.OrdinalIgnoreCase));
   }
 
   public string GetFieldValue(Record record, string fieldName)
   {
-    EnsureDb();
-
     var fieldDef = GetField(fieldName);
     var value = record.GetUserField(fieldDef);
 
@@ -196,8 +180,6 @@ using TRIMSDK;
 ```
   public Record GetRecord(string recordNr)
   {
-    EnsureDb();
-
     return TrimDb.GetRecord(recordNr);
   }
     
@@ -209,8 +191,6 @@ using TRIMSDK;
     Location owner = null,
     Location author = null)
   {
-    EnsureDb();
-
     RecordType recordType = GetRecordTypes().First(a => a.Name.Equals(recordTypeName, StringComparison.OrdinalIgnoreCase));
     return CreateRecord(recordType, containerNr, classification, homeLocation, owner, author);
   }
@@ -223,8 +203,6 @@ using TRIMSDK;
     Location owner = null,
     Location author = null)
   {
-    EnsureDb();
-
     Record rec = TrimDb.NewRecord(recordType);
 
     if (!string.IsNullOrEmpty(containerNr))
@@ -260,8 +238,6 @@ using TRIMSDK;
 
   public bool DeleteRecord(string recordNr)
   {
-    EnsureDb();
-
     Record rec = GetRecord(recordNr);
     rec.Delete();
     return true;
@@ -269,8 +245,6 @@ using TRIMSDK;
 
   public Location GetCurrentUser()
   {
-    EnsureDb();
-
     return TrimDb.CurrentUser;
   }
 
